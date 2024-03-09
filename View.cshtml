@@ -1,0 +1,26 @@
+@model List<Tarefa>
+
+<h2>Minha Lista de Tarefas</h2>
+
+<ul>
+    @foreach (var tarefa in Model)
+    {
+        <li>
+            @tarefa.Descricao
+            @if (!tarefa.Concluida)
+            {
+                using (Html.BeginForm("Concluir", "Tarefa"))
+                {
+                    @Html.Hidden("id", tarefa.Id)
+                    <input type="submit" value="Concluir" />
+                }
+            }
+        </li>
+    }
+</ul>
+
+<h3>Adicionar Nova Tarefa</h3>
+<form action="@Url.Action("Adicionar", "Tarefa")" method="post">
+    <input type="text" name="descricao" />
+    <input type="submit" value="Adicionar" />
+</form>
